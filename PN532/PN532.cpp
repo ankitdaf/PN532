@@ -108,6 +108,33 @@ void PN532::PrintHexChar(const uint8_t *data, const uint32_t numBytes)
 
 /**************************************************************************/
 /*!
+    @brief  Prints a value in plain characters
+
+    @param  data      Pointer to the data
+    @param  numBytes  Data length in bytes
+*/
+/**************************************************************************/
+void PN532::PrintChar(const uint8_t *data, const uint32_t numBytes)
+{
+#ifdef ARDUINO
+    
+    for (uint8_t i = 0; i < numBytes; i++) {
+        char c = data[i];
+        Serial.print(c);
+    }
+    Serial.println("");
+#else
+    
+    for (uint8_t i = 0; i < numBytes; i++) {
+        char c = data[i];
+        printf("%c", c);
+    }
+    printf("\n");
+#endif
+}
+
+/**************************************************************************/
+/*!
     @brief  Checks the firmware version of the PN5xx chip
 
     @returns  The chip's firmware version and ID
